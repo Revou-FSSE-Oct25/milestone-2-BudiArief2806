@@ -43,33 +43,53 @@ interface PlayerInfo {
 }
 
 const gameElements: GameElements = {
-  playerNameInput: document.getElementById("player-name") as HTMLInputElement,
-  playerAgeInput: document.getElementById("player-age") as HTMLInputElement,
-  playerClassInput: document.getElementById("player-class") as HTMLInputElement,
-  playerInfo: document.getElementById("player-info") as HTMLElement,
+  playerNameInput: document.getElementById(
+    "player-name"
+  ) as HTMLInputElement | null,
+  playerAgeInput: document.getElementById(
+    "player-age"
+  ) as HTMLInputElement | null,
+  playerClassInput: document.getElementById(
+    "player-class"
+  ) as HTMLInputElement | null,
+  playerInfo: document.getElementById("player-info") as HTMLElement | null,
 
   // Game 1 & umum
-  startBtn: document.getElementById("start-btn") as HTMLButtonElement,
-  gameSection: document.getElementById("game-section") as HTMLElement,
-  guessInput: document.getElementById("guess-input") as HTMLInputElement,
-  guessBtn: document.getElementById("guess-btn") as HTMLButtonElement,
-  gameMessage: document.getElementById("game-message") as HTMLElement,
-  paragraf: document.getElementById("teks") as HTMLElement,
+  startBtn: document.getElementById("start-btn") as HTMLButtonElement | null,
+  gameSection: document.getElementById("game-section") as HTMLElement | null,
+  guessInput: document.getElementById("guess-input") as HTMLInputElement | null,
+  guessBtn: document.getElementById("guess-btn") as HTMLButtonElement | null,
+  gameMessage: document.getElementById("game-message") as HTMLElement | null,
+  paragraf: document.getElementById("teks") as HTMLElement | null,
 
   // Game 2
-  memorySection: document.getElementById("memory-section") as HTMLElement,
+  memorySection: document.getElementById(
+    "memory-section"
+  ) as HTMLElement | null,
 
   // Game 3
-  clickerSection: document.getElementById("clicker-section") as HTMLElement,
-  clickerBtn: document.getElementById("clicker-btn") as HTMLButtonElement,
-  clickerScoreSpan: document.getElementById("clicker-score") as HTMLElement,
-  clickerTimerSpan: document.getElementById("clicker-timer") as HTMLElement,
-  clickerMessage: document.getElementById("clicker-message") as HTMLElement,
+  clickerSection: document.getElementById(
+    "clicker-section"
+  ) as HTMLElement | null,
+  clickerBtn: document.getElementById(
+    "clicker-btn"
+  ) as HTMLButtonElement | null,
+  clickerScoreSpan: document.getElementById(
+    "clicker-score"
+  ) as HTMLElement | null,
+  clickerTimerSpan: document.getElementById(
+    "clicker-timer"
+  ) as HTMLElement | null,
+  clickerMessage: document.getElementById(
+    "clicker-message"
+  ) as HTMLElement | null,
 };
 
 const memoryElements: MemoryElements = {
-  memoryGrid: document.getElementById("memory-grid") as HTMLElement,
-  memoryMessage: document.getElementById("memory-message") as HTMLElement,
+  memoryGrid: document.getElementById("memory-grid") as HTMLElement | null,
+  memoryMessage: document.getElementById(
+    "memory-message"
+  ) as HTMLElement | null,
 };
 
 // Data pemain
@@ -264,7 +284,7 @@ function createMemoryCards(): void {
 function onCardClick(e: Event): void {
   if (memoryState.lockedBoard) return;
 
-  const card = e.currentTarget as HTMLButtonElement;
+  const card = e.currentTarget as HTMLButtonElement | null;
   if (!card) return;
 
   // gunakan switch untuk meng-handle kondisi klik kartu
@@ -400,7 +420,7 @@ function startClickerGame(): void {
     gameElements.clickerScoreSpan!.textContent = String(clickerScore);
   });
 
-  if (clickerIntervalId!) {
+  if (clickerIntervalId !== null) {
     clearInterval(clickerIntervalId);
   }
 
@@ -419,9 +439,9 @@ function endClickerGame(): void {
 
   clickerRunning = false;
 
-  if (clickerIntervalId!) {
+  if (clickerIntervalId !== null) {
     clearInterval(clickerIntervalId);
-    clickerIntervalId;
+    clickerIntervalId = null;
   }
 
   gameElements.clickerMessage.innerHTML = `Waktu habis! Skor akhir kamu: <strong>${clickerScore}</strong>.`;
@@ -435,7 +455,7 @@ function endClickerGame(): void {
 
 // ===== DOMContentLoaded =====
 document.addEventListener("DOMContentLoaded", () => {
-  const p = document.getElementById("teks") as HTMLElement;
+  const p = document.getElementById("teks") as HTMLElement | null;
   if (p) {
     p.innerHTML = "Indahnya permainan Anak-Anak";
   }

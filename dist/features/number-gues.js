@@ -14,15 +14,9 @@ const el = {
     paragraf: document.getElementById("teks"),
     attemptsInfo: document.getElementById("attempts-info"),
 };
-/* =====================================================
-   Game State
-   ===================================================== */
 let currentPlayer = null;
 let secretNumber = null;
 let attemptsLeft = MAX_ATTEMPTS;
-/* =====================================================
-   Utilities
-   ===================================================== */
 function setInstructions() {
     if (!el.instructions)
         return;
@@ -81,9 +75,6 @@ function loadPlayerToForm() {
     }
     catch { }
 }
-/* =====================================================
-   Game Logic (versi lama)
-   ===================================================== */
 function startGame() {
     if (!el.gameSection || !el.gameMessage || !el.guessInput)
         return;
@@ -94,7 +85,6 @@ function startGame() {
     // generate secret number
     secretNumber =
         Math.floor(Math.random() * (GUESS_MAX - GUESS_MIN + 1)) + GUESS_MIN;
-    // expose ke console (baru bisa diketik SETELAH start)
     window.secretNumber = secretNumber;
     attemptsLeft = MAX_ATTEMPTS;
     updateAttemptsUI();
@@ -139,9 +129,6 @@ function handleGuess() {
         window.secretNumber = null;
     }
 }
-/* =====================================================
-   DOM Ready
-   ===================================================== */
 document.addEventListener("DOMContentLoaded", () => {
     bindHomeButton();
     if (el.paragraf)

@@ -42,7 +42,7 @@ function setInstructions(): void {
       <ol class="list-decimal ml-5 space-y-1">
         <li>Klik <strong>Mulai Game</strong> untuk mengacak kartu.</li>
         <li>Klik 2 kartu untuk membukanya.</li>
-        <li>Jika simbol sama, kartu akan terkunci sebagai <em>matched</em>.</li>
+        <li>Jika simbol sama, kartu akan terkunci sebagai <em>cocok</em>.</li>
         <li>Cocokkan semua pasangan untuk lanjut ke Clicker.</li>
       </ol>
     </div>
@@ -175,7 +175,5 @@ document.addEventListener("DOMContentLoaded", () => {
   ensurePlayerExistsOrRedirect();
 
   setInstructions();
-
-  // game mulai hanya setelah klik start (sesuai tugas: instruksi sebelum mulai)
   if (el.startBtn) el.startBtn.addEventListener("click", startMemoryGame);
 });

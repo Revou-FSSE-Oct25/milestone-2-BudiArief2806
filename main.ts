@@ -15,7 +15,7 @@ export const PLAYER_INFO_KEY = "playerInfo";
 export const CLICKER_BEST_KEY = "clickerBestScore";
 
 export function goHome(): void {
-  window.location.href = "index.html";
+  window.location.href = "../index.html";
 }
 
 export function bindHomeButton(): void {
@@ -40,7 +40,7 @@ export function loadPlayerInfoFromStorage(): PlayerInfo | null {
 export function ensurePlayerExistsOrRedirect(): PlayerInfo | null {
   const p = loadPlayerInfoFromStorage();
   if (!p) {
-    window.location.href = "number-gues.html"; // <-- sesuaikan nama file kamu
+    window.location.href = "number-gues.html";
     return null;
   }
   return p;

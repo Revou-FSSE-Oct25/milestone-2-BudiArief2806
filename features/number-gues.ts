@@ -62,16 +62,10 @@ const el: GuessElements = {
   attemptsInfo: document.getElementById("attempts-info") as HTMLElement | null,
 };
 
-/* =====================================================
-   Game State
-   ===================================================== */
 let currentPlayer: PlayerInfo | null = null;
 let secretNumber: number | null = null;
 let attemptsLeft = MAX_ATTEMPTS;
 
-/* =====================================================
-   Utilities
-   ===================================================== */
 function setInstructions(): void {
   if (!el.instructions) return;
 
@@ -136,9 +130,6 @@ function loadPlayerToForm(): void {
   } catch {}
 }
 
-/* =====================================================
-   Game Logic (versi lama)
-   ===================================================== */
 function startGame(): void {
   if (!el.gameSection || !el.gameMessage || !el.guessInput) return;
 
@@ -151,7 +142,6 @@ function startGame(): void {
   secretNumber =
     Math.floor(Math.random() * (GUESS_MAX - GUESS_MIN + 1)) + GUESS_MIN;
 
-  // expose ke console (baru bisa diketik SETELAH start)
   window.secretNumber = secretNumber;
 
   attemptsLeft = MAX_ATTEMPTS;
@@ -207,9 +197,6 @@ function handleGuess(): void {
   }
 }
 
-/* =====================================================
-   DOM Ready
-   ===================================================== */
 document.addEventListener("DOMContentLoaded", () => {
   bindHomeButton();
 

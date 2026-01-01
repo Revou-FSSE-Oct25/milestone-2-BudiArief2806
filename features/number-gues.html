@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <title>GamesRevouFun - Tebak Angka</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @keyframes bg-pan {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 50% 50%;
+        }
+        100% {
+          background-position: 100% 50%;
+        }
+      }
+      .bg-globe {
+        background-image: url("../image/globe.png");
+        background-size: 140%;
+        background-repeat: no-repeat;
+        background-position: 0% 50%;
+        animation: bg-pan 20s linear infinite alternate;
+      }
+      .bg-child {
+        background-image: url("../image/child.png");
+        background-size: 110%;
+        background-repeat: no-repeat;
+        background-position: 0% 50%;
+        animation: bg-pan 20s linear infinite alternate;
+      }
+    </style>
+  </head>
+
+  <body class="min-h-screen bg-black text-white flex flex-col text-center">
+    <header class="w-full bg-slate-900/90 border-b border-slate-800 z-20">
+      <h1 class="text-teal-600 bg-globe text-3xl py-4">GamesRevouFun</h1>
+    </header>
+
+    <main class="relative flex-1">
+      <div class="absolute inset-0 bg-child"></div>
+      <div class="absolute inset-0 bg-black/70"></div>
+
+      <section class="relative z-10 flex flex-col items-center pt-14 px-4">
+        <!-- tombol kembali (wajib sesuai tugas) -->
+        <button
+          id="btn-home"
+          class="text-sm text-slate-200 hover:text-white underline"
+          type="button"
+        >
+          ← Kembali ke Menu
+        </button>
+
+        <!-- Judul + form pemain + tombol mulai -->
+        <section class="text-center max-w-2xl mx-auto mt-6">
+          <h1 class="text-2xl md:text-3xl font-semibold">
+            Game Tebak Angka yang menyenangkan
+          </h1>
+
+          <p id="teks" class="mt-4 text-slate-200 text-sm md:text-base">
+            We are innovation partners, purveyors of a new development services
+            model for creative industries.
+          </p>
+
+          <!-- instruksi sebelum mulai (wajib sesuai tugas) -->
+          <div
+            id="instructions"
+            class="mt-4 w-full max-w-md mx-auto text-left"
+          ></div>
+
+          <nav class="mt-6 grid gap-3 max-w-md mx-auto text-left text-sm">
+            <label class="flex flex-col gap-1">
+              <span>Username</span>
+              <input
+                id="player-name"
+                type="text"
+                class="px-3 py-2 rounded bg-slate-800 border border-slate-600"
+                placeholder="Nama lengkap"
+              />
+            </label>
+
+            <label class="flex flex-col gap-1">
+              <span>Umur</span>
+              <input
+                id="player-age"
+                type="number"
+                min="1"
+                class="px-3 py-2 rounded bg-slate-800 border border-slate-600"
+                placeholder="Umur"
+              />
+            </label>
+
+            <label class="flex flex-col gap-1">
+              <span>Kelas</span>
+              <input
+                id="player-class"
+                type="text"
+                class="px-3 py-2 rounded bg-slate-800 border border-slate-600"
+                placeholder="Misal: 10 IPA 1"
+              />
+            </label>
+          </nav>
+
+          <!-- ubah id jadi btn-start -->
+          <button
+            id="btn-start"
+            class="mt-6 inline-block rounded bg-gradient-to-r from-orange-500 via-orange-400 to-yellow-400 px-8 py-2 text-sm md:text-base font-semibold text-slate-950 hover:opacity-90 transition"
+            type="button"
+          >
+            Mulai Game
+          </button>
+
+          <!-- optional: info pemain kalau kamu mau tampilkan -->
+          <p
+            id="player-info"
+            class="mt-3 text-xs text-slate-300 text-center"
+          ></p>
+        </section>
+
+        <!-- Tebak Angka -->
+        <section
+          id="game-section"
+          class="mt-8 w-full max-w-md mx-auto bg-slate-900/90 border border-slate-700 rounded-lg p-6 hidden"
+        >
+          <h2 class="text-lg font-semibold mb-2 text-center">
+            Tebak Angka (1 - 100)
+          </h2>
+
+          <p id="game-message" class="text-sm text-slate-200 mb-2 text-center">
+            Saya sudah memilih angka. Coba tebak!
+          </p>
+
+          <!-- info attempt (wajib sesuai tugas) -->
+          <p
+            id="attempts-info"
+            class="mb-4 text-xs text-slate-300 text-center"
+          ></p>
+
+          <div class="flex gap-2 justify-center">
+            <input
+              id="guess-input"
+              type="number"
+              min="1"
+              max="100"
+              class="w-24 px-3 py-2 rounded bg-slate-800 border border-slate-600 text-center focus:outline-none focus:ring-2 focus:ring-orange-500"
+              placeholder="1-100"
+            />
+            <button
+              id="guess-btn"
+              class="px-4 py-2 rounded bg-orange-500 hover:bg-orange-600 text-slate-950 font-semibold"
+              type="button"
+            >
+              Tebak
+            </button>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <!-- penting: panggil file JS hasil compile TS khusus game ini -->
+    <script type="module" src="../dist/features/number-gues.js"></script>
+  </body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <title>GamesRevouFun - Memory Card</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @keyframes bg-pan {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 50% 50%;
+        }
+        100% {
+          background-position: 100% 50%;
+        }
+      }
+      .bg-globe {
+        background-image: url("../image/globe.png");
+        background-size: 140%;
+        background-repeat: no-repeat;
+        background-position: 0% 50%;
+        animation: bg-pan 20s linear infinite alternate;
+      }
+      .bg-child {
+        background-image: url("../image/child.png");
+        background-size: 110%;
+        background-repeat: no-repeat;
+        background-position: 0% 50%;
+        animation: bg-pan 20s linear infinite alternate;
+      }
+    </style>
+  </head>
+
+  <body class="min-h-screen bg-black text-white flex flex-col text-center">
+    <header class="w-full bg-slate-900/90 border-b border-slate-800 z-20">
+      <h1 class="text-teal-600 bg-globe text-3xl py-4">GamesRevouFun</h1>
+    </header>
+
+    <main class="relative flex-1">
+      <div class="absolute inset-0 bg-child"></div>
+      <div class="absolute inset-0 bg-black/70"></div>
+
+      <section class="relative z-10 flex flex-col items-center pt-14 px-4">
+        <!-- tombol kembali (wajib sesuai tugas) -->
+        <button
+          id="btn-home"
+          class="text-sm text-slate-200 hover:text-white underline"
+          type="button"
+        >
+          ← Kembali ke Menu
+        </button>
+
+        <section class="text-center max-w-2xl mx-auto mt-6">
+          <h1 class="text-2xl md:text-3xl font-semibold">Memory Card Game</h1>
+          <p class="mt-4 text-slate-200 text-sm md:text-base">
+            Cocokkan semua pasangan kartu.
+          </p>
+
+          <!-- instruksi sebelum mulai (wajib) -->
+          <div
+            id="instructions"
+            class="mt-4 w-full max-w-md mx-auto text-left"
+          ></div>
+
+          <!-- tombol mulai (wajib) -->
+          <button
+            id="btn-start"
+            class="mt-5 inline-block rounded bg-gradient-to-r from-orange-500 via-orange-400 to-yellow-400 px-8 py-2 text-sm md:text-base font-semibold text-slate-950 hover:opacity-90 transition"
+            type="button"
+          >
+            Mulai Game
+          </button>
+        </section>
+
+        <section
+          id="memory-section"
+          class="mt-8 w-full max-w-md mx-auto bg-slate-900/90 border border-slate-700 rounded-lg p-6"
+        >
+          <p
+            id="memory-message"
+            class="text-sm text-slate-200 mb-4 text-center"
+          >
+            Klik "Mulai Game" untuk memulai.
+          </p>
+
+          <div id="memory-grid" class="grid grid-cols-4 gap-3"></div>
+        </section>
+      </section>
+    </main>
+
+    <!-- panggil JS hasil compile TS khusus memory -->
+    <script type="module" src="../dist/features/memory-card.js"></script>
+  </body>
+</html>

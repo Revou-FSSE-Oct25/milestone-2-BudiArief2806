@@ -1,4 +1,3 @@
-// memory-card.ts
 import { bindHomeButton, ensurePlayerExistsOrRedirect } from "../main.js";
 const el = {
     instructions: document.getElementById("instructions"),
@@ -22,7 +21,7 @@ function setInstructions() {
       <ol class="list-decimal ml-5 space-y-1">
         <li>Klik <strong>Mulai Game</strong> untuk mengacak kartu.</li>
         <li>Klik 2 kartu untuk membukanya.</li>
-        <li>Jika simbol sama, kartu akan terkunci sebagai <em>matched</em>.</li>
+        <li>Jika simbol sama, kartu akan terkunci sebagai <em>cocok</em>.</li>
         <li>Cocokkan semua pasangan untuk lanjut ke Clicker.</li>
       </ol>
     </div>
@@ -35,6 +34,9 @@ function resetState() {
         lockedBoard: false,
         matchedPairs: 0,
     };
+}
+function setFlipped(card, flipped) {
+    card.classList.toggle("bg-orange-500/40", flipped);
 }
 function startMemoryGame() {
     if (!el.memoryGrid || !el.memoryMessage)
@@ -69,7 +71,7 @@ function onCardClick(e) {
             break;
     }
     card.textContent = card.dataset.symbol ?? "";
-    card.classList.add("bg-orange-500/40");
+    setFlipped(card, true);
     if (!state.firstCard) {
         state.firstCard = card;
         return;
@@ -120,8 +122,8 @@ function hideCards() {
         }
         state.firstCard.textContent = "";
         state.secondCard.textContent = "";
-        state.firstCard.classList.remove("bg-orange-500/40");
-        state.secondCard.classList.remove("bg-orange-500/40");
+        setFlipped(state.firstCard, false);
+        setFlipped(state.secondCard, false);
         resetTurn();
     }, 800);
 }
@@ -134,7 +136,6 @@ document.addEventListener("DOMContentLoaded", () => {
     bindHomeButton();
     ensurePlayerExistsOrRedirect();
     setInstructions();
-    // game mulai hanya setelah klik start (sesuai tugas: instruksi sebelum mulai)
     if (el.startBtn)
         el.startBtn.addEventListener("click", startMemoryGame);
 });

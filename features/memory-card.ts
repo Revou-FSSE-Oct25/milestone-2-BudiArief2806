@@ -1,4 +1,3 @@
-// memory-card.ts
 import { bindHomeButton, ensurePlayerExistsOrRedirect } from "../main.js";
 
 interface MemoryElements {
@@ -17,11 +16,13 @@ interface MemoryState {
 }
 
 const el: MemoryElements = {
-  instructions: document.getElementById("instructions") as HTMLElement,
-  startBtn: document.getElementById("btn-start") as HTMLButtonElement,
+  instructions: document.getElementById("instructions") as HTMLElement | null,
+  startBtn: document.getElementById("btn-start") as HTMLButtonElement | null,
 
-  memoryGrid: document.getElementById("memory-grid") as HTMLElement,
-  memoryMessage: document.getElementById("memory-message") as HTMLElement,
+  memoryGrid: document.getElementById("memory-grid") as HTMLElement | null,
+  memoryMessage: document.getElementById(
+    "memory-message"
+  ) as HTMLElement | null,
 };
 
 const symbols: string[] = ["🍎", "🍌", "🍇", "🍉"];
@@ -56,6 +57,10 @@ function resetState(): void {
     lockedBoard: false,
     matchedPairs: 0,
   };
+}
+
+function setFlipped(card: HTMLButtonElement, flipped: boolean): void {
+  card.classList.toggle("bg-orange-500/40", flipped);
 }
 
 function startMemoryGame(): void {
@@ -97,7 +102,7 @@ function onCardClick(e: Event): void {
   }
 
   card.textContent = card.dataset.symbol ?? "";
-  card.classList.add("bg-orange-500/40");
+  setFlipped(card, true);
 
   if (!state.firstCard) {
     state.firstCard = card;
@@ -156,10 +161,13 @@ function hideCards(): void {
       resetTurn();
       return;
     }
+
     state.firstCard.textContent = "";
     state.secondCard.textContent = "";
-    state.firstCard.classList.remove("bg-orange-500/40");
-    state.secondCard.classList.remove("bg-orange-500/40");
+
+    setFlipped(state.firstCard, false);
+    setFlipped(state.secondCard, false);
+
     resetTurn();
   }, 800);
 }
